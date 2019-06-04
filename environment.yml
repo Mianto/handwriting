@@ -8,9 +8,6 @@ dependencies:
   - python=3.6.8
   - setuptools=41.0.1
   - sqlite=3.28.0
-  - vc=14.1
-  - vs2015_runtime=14.15.26706
   - wheel=0.33.4
-  - wincertstore=0.2
 prefix: D:\Documents\envs\prescription
 
