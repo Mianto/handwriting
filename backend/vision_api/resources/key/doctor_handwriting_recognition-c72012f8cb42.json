@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "doctor-handwriting-recognition",
+  "private_key_id": "c72012f8cb4264dc548d86afb1f60871c9444cdb",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDOGYGUUYA2z2Si\nRismNw2Auk6YOzNggakrO7wVpOA4nt46FCl0jUBOzAUP02f+7X2xQYJ5CSckogTP\n0AskgQ7mXL9xc9zXS7swaVNG8W0QoipWIT1ia7VVXpJePIySrjEa+ftiFlugkWca\n4VQc9zBbgvVuJesA9Pa2tlPT3eM4ugSMPboIliXpiW/Y40Sd65HtXQWDNVdIusPB\nvj6r9DvbVKaQfdLsJuOyugfdYufGbr+FwYBLdz8aQg9UBZG+4yZqlq5Lvumtdnj3\nIBSokfuIDeb6QPFmg8X3wgjZMbtOyeSycfCTQEpGLk0foa0heow4v9V1tKOQd+Nq\nEjEykmSHAgMBAAECggEABncNKVTnjuoxWVgwJFIklBddpC+ln4jE5yLhj7nZtFnJ\nCMz3G/Cn+SpnNXIUcg4ktWzwcp5Te8+yE1hbirkA4AykW++35SNuay9ZBs56wfad\n5pCP92Iyw8tkQtAaOZB84KbBnvfdxr5CglJZ+OqihrLBKV2UVWkmkBOAf6xKY2ey\nYwaZTMMb/yttHze8r4goK+yXYnTn7RULU0bYs3VrX7NbaaPCnvDqo5I8wq+FkFFC\nvTSm74XjLVPLIxptGOorNermH6bfDj9yYUlrWM+QyF1scX7CGLfPKS1As1cV7Zvj\n9FDcCVOigDBjJRnTQzPFONN4cEXHEvAwuV4is29LSQKBgQDtCAIHfj5oT2PbBnJs\nVh3i5HQQufw7VfeeU4+Qk06rNSzhTBHXZ7uOTt2OG1KURMdcA2XCF5Twrt/8IRFI\n9dRu1XFwksq0DhucfExJPLGjwBxsiwlW8ml6Ftv8ZNRohFue6B7S7PXICnv9sh3E\nFK4a4VxALHTUHvYF/SpirFMJgwKBgQDel894CwbHdGmivRCZNkoyUxtmhZgmPE+V\n3LCjTJvZFUpsp7jVDRTj6UsjP0bQAJ4EcCD/wZEHQ30dLIiFCc15lTtAivrLwsHd\njxmmO/hArX5EGf3Zbdz+uV9aHBPYPuKIzy3wOWv6UqXqbSuZ7ES06NLTjlvo9Ox5\n4oALGPB9rQKBgHQy+Muzl+SLBujYwD9b+ErCtCN/CagM/NchH8BAdtB3wQixwg1X\nTRr2jqabvl/xV8pD4B7GcL2M/UEc9NxPp1SuTm5hh/287MxKIxvEJVGhXE3Z2zpE\nnHC9xBp3U6npOQEtye6dO+BVQ3ObXfxCJxgGYrMTGDLk+rb05VJ6KDsBAoGACDZt\nry4o997xrtFu9VgtcKHkVuoC7RY4kXzs/3lqHp5MeqnNhf7PkIEhBpHlGPOM4PkK\nHqWTpkL1MMhd2Rq9fAjngMAf9Lig0n3fImUACdLc38JdvVHyX2uTew2iJc5cKVQL\ni9tygm/eM0IH48v11P7qGGgeOAAhYXXb54zqApkCgYBYRxwFMQ1QQbCgR7Y5SPg5\nRxmTram8oadBsX8DZ0uPGrF6Of2/kywKLUD8juQF+9nHpsV/dnhNVIbfkIci3XYO\n+3AUBTo+sxawVYJzoPNKD/cINKD+Pu1U4Ne0aLRPMjbQf1Ri5g4BnTxDoYDEheCB\nDRidJ449nWzTsNbIlEnDnQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "konnectdoc@doctor-handwriting-recognition.iam.gserviceaccount.com",
+  "client_id": "110466748033557320156",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/konnectdoc%40doctor-handwriting-recognition.iam.gserviceaccount.com"
+}
