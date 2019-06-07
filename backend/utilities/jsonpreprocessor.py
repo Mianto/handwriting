@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 
-def dict_from_json(filename):
+def dict_from_json_file(filename):
     """
     :param string filepath: path to the json file
     :return dict: A dictionary of the files

@@ -4,7 +4,7 @@ from stanfordcorenlp import StanfordCoreNLP
 import os
 
 
-def get_ner(json_dict, core_nlp_path = r'/home/prasahnt/Dev/handwriting/backend/utilities/ner/resources/stanford-corenlp-full-2018-10-05'):
+def get_ner(json_dict, core_nlp_path):
     """
     param: json_dict dict file containg jpg data
            core_nlp_path path of stanford-corenlp-full-2018-10-05
