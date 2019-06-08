@@ -22,6 +22,13 @@ def dict_from_json_file(filename):
     return json_dict
 
 
+def dict_from_json(json_file):
+    """
+    :param json json_file: json_file from vision_api
+    :return dict: a dictionary
+    """
+    return eval(json_file)
+
 
 def start_and_end_page_value(json_dict):
     """ Return the start value of the page

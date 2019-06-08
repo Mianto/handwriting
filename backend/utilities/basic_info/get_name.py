@@ -40,7 +40,7 @@ def get_vocab_terms(path):
     return set(vocab)
 
 
-def name(json_dict, json_dict_blank, name_list_path, core_nlp_path):
+def name(json_dict, json_dict_blank="", name_list_path, core_nlp_path):
     """Get name if it exist in name vocab list
     :param dict json_dict: full response of the vision api in dict
     :param dict json_dict_blank: response of the blank page for the google api

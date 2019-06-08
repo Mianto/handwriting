@@ -3,6 +3,7 @@ import logging
 from flask_cors import CORS
 import os
 from werkzeug import secure_filename
+from utils import final_pipeline
 
 app = Flask(__name__)
 CORS(app)
@@ -24,16 +25,17 @@ def create_new_folder(local_dir):
 @app.route('/upload', methods = ['POST'])
 def api_root():
     app.logger.info(PROJECT_HOME)
-    if request.method == "POST" and request.files['image']:
+    if request.method == "POST" and request.files.getlist('images'):
         app.logger.info(app.config['UPLOAD_FOLDER'])
-        img = request.files['image']
-        img_name = secure_filename(img.filename)
         create_new_folder(app.config['UPLOAD_FOLDER'])
-        create_new_folder(app.config['TEMP_FOLDER'])
-        saved_path = os.path.join(app.config['UPLOAD_FOLDER'], img_name)
-        app.logger.info("saving {}".format(saved_path))
-        img.save(saved_path)
-        # result = final_pipeline(app.config['UPLOAD_FOLDER'], img_name)
+        imgs = request.files.getlist('images')
+        for img in imgs:
+            img_name = secure_filename(img.filename)
+            saved_path = os.path.join(app.config['UPLOAD_FOLDER'], img_name)
+            app.logger.info("saving {}".format(saved_path))
+            img.save(saved_path)
+        
+        result = final_pipeline(app.config['UPLOAD_FOLDER'], img_written, img_blank)
         return jsonify(
             result = result
         )
