@@ -13,7 +13,7 @@ def get_first_name_if_name(json_dict):
         i += 1
         if txt.lower() == 'name' or "name" in txt.lower():
             j = 0
-            while len(texts[i]) < 2 && j < 50:
+            while len(texts[i]) < 2 and j < 50:
                 i += 1
                 j += 1
             return texts[i]
@@ -53,34 +53,44 @@ def name(json_dict, json_dict_blank, name_list_path, core_nlp_path):
         first_name = get_first_name_if_name(json_dict)
         last_name = get_last_name(json_dict, first_name, name_vocab)
         if last_name: 
-            return first_name + last_name
+            return first_name, last_name
         return first_name
 
     else:
         total = get_ner(json_dict, core_nlp_path)
         blank = get_ner(json_dict_blank, core_nlp_path)
 
+        written = list()
+        for i in total:
+            falg = 0
+            for j in blank:
+                if i == j:
+                    falg = 1
+            if falg == 0:
+                written.append(i)
         
-        written = list(set(total) - set(blank))
         name_list = list()
 
         for word in written:
-            if word in name_vocab:
+            if word.strip().lower() in name_vocab:
                 name_list.append(word)
-        
+      
+
         for name in name_list:
-            last_name = get_last_name(json_dict, name, name_vocab)
-            if last_name:
-                return name + last_name
+            last_name = get_last_name(json_dict, name)
+
+            if last_name in name_list:
+                return name, last_name
         
-        return None
+        if len(name_list) == 1:
+            return name_list[0]
     
-def get_last_name(json_dict, first_name, name_file_list):
     
-    last_name = get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.03)[0]['description']
-    if last_name in name_file_list:
-        return last_name
-    return None
+def get_last_name(json_dict, first_name):
+
+    if get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.002):
+        return get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.002)[0]['description']
+    
 
 
 

@@ -19,7 +19,7 @@ def get_ner(json_dict, core_nlp_path):
     for x in nlp.pos_tag(ner_data):
         if 'NNP' in x:
             nnp.append(x[0])
-    
+    nlp.close()
     return nnp
 
 
