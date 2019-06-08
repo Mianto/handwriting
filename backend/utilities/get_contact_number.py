@@ -12,7 +12,7 @@ def contact_number(json_dict):
     number = re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', json_dict)
 
 
-def patient_contact_number(written_number, blank_number)
+def patient_contact_number(written_number, blank_number):
     """
     param: contacts number in prescribed, contacts number in blank page
     return: patient conatct number

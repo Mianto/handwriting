@@ -106,7 +106,7 @@ def get_text_from_bounding_box(bounding_boxes):
     return concat_string
 
 
-def get_adjacent_box(json_dict, box_coordinates, page_percentage=0.05):
+def get_adjacent_box(json_dict, box_coordinates, page_percentage=0.05, direction="y"):
     """Returns adjacent box to right and bottom
     :param dict json_dict: full response of the vision api in dict
     :param list box_coordinates: boundingPoly value of the box
@@ -117,10 +117,15 @@ def get_adjacent_box(json_dict, box_coordinates, page_percentage=0.05):
     initial_box_percentage = percentage_value_of_box(box_coordinates, start, end)
     for i in range(1, len(json_dict['textAnnotations'])):
         box_i_percentage = percentage_value_of_box(json_dict['textAnnotations'][i]['boundingPoly']['vertices'], start, end)
-        if 0 < box_i_percentage[1] - initial_box_percentage[1] < page_percentage:
-            return_list.append(json_dict['textAnnotations'][i])
-        if 0 < box_i_percentage[0] - initial_box_percentage[1] < page_percentage:
-            return_list.append(json_dict['textAnnotations'][i])
+        if direction == "x":
+            if 0 < box_i_percentage[0] - initial_box_percentage[0] < page_percentage:
+                return_list.append(json_dict['textAnnotations'][i])
+        else:
+            if 0 < box_i_percentage[0] - initial_box_percentage[0] < page_percentage:
+                return_list.append(json_dict['textAnnotations'][i])
+            if 0 < box_i_percentage[1] - initial_box_percentage[1] < page_percentage:
+                return_list.append(json_dict['textAnnotations'][i])
+        
     return return_list
 
 
