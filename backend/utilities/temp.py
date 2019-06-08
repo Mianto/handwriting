@@ -4,6 +4,8 @@ from jsonpreprocessor import dict_from_json_file
 from get_name import name
 import copy
 import get_date
+import get_gender
+import get_age
 
 # data = dict_from_json(r'/home/prasahnt/Desktop/handwriting/backend/utilities/ner/resources')
 # li = get_ner(data,r'/home/prasahnt/Dev/Gcloud/src/stanford-corenlp-full-2018-10-05')
@@ -19,3 +21,4 @@ total = dict_from_json_file('/home/prasahnt/Desktop/handwriting/backend/utilitie
 # print(name(total,blank,name_list,core_nlp)) 
 
 print(get_date.get_date_list(total))
+print(get_gender.gender_printed(total),get_age.age(total, "MANJU"))
