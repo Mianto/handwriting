@@ -1,5 +1,5 @@
 import re
-from jsonpreprocessor import get_first_name_box, get_adjacent_box
+from ..jsonpreprocessor import get_first_name_box, get_adjacent_box
 
 
 def age(json_dict, first_name):
@@ -8,6 +8,8 @@ def age(json_dict, first_name):
     :param string first_name: first name of the patient
     :return int: Age if it exists
     """
+    if not first_name:
+        return None
     first_name_bb = get_first_name_box(json_dict, first_name)
     adjacent_first_name_boxes = get_adjacent_box(json_dict, first_name_bb)
     li = []
@@ -18,13 +20,14 @@ def age(json_dict, first_name):
         i += 1
         if txt.lower() == 'age' or 'age' in txt.lower():
             while i < 100:
-                if re.match(r"[0-9+]+", text[i + 1]):
-                    return text[i + 1]
+                if re.match(r".*?(\d+).*(\d+)", text[i + 1]):
+                    a = re.match(r".*?(\d+).*(\d+)", text[i + 1])
+                    return ''.join(a[0])
                 i += 1
     
     # find age in case age not printed
     for box in adjacent_first_name_boxes:
-        if re.match(r"^[0-9+]+", box['description']):
+        if re.match(r".*?(\d+).*(\d+)", box['description']):
             li.append(box['description'])
     for num in li:
         if  '+' in num:

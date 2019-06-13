@@ -9,7 +9,7 @@ def contact_number(json_dict):
     :param json_dict 
     :return all present contact numbers 
     """
-    return re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', json_dict)
+    return re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', json_dict['textAnnotations'][0]['description'])
 
 
 def patient_contact_number(written_number, blank_number):

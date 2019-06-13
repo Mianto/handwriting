@@ -1,5 +1,5 @@
-from ner.name_recognition import get_ner
-from jsonpreprocessor import *
+from ..ner.name_recognition import get_ner
+from ..jsonpreprocessor import *
 
 
 def get_first_name_if_name(json_dict):
@@ -40,7 +40,7 @@ def get_vocab_terms(path):
     return set(vocab)
 
 
-def name(json_dict, json_dict_blank="", name_list_path, core_nlp_path):
+def name(json_dict, name_list_path, core_nlp_path, json_dict_blank=""):
     """Get name if it exist in name vocab list
     :param dict json_dict: full response of the vision api in dict
     :param dict json_dict_blank: response of the blank page for the google api
@@ -51,7 +51,7 @@ def name(json_dict, json_dict_blank="", name_list_path, core_nlp_path):
 
     if is_name_present(json_dict):
         first_name = get_first_name_if_name(json_dict)
-        last_name = get_last_name(json_dict, first_name, name_vocab)
+        last_name = get_last_name(json_dict, first_name)
         if last_name: 
             return first_name, last_name
         return first_name

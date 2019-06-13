@@ -3,3 +3,4 @@
 */*/.vscode/*
 __pycache__/
 *.pyc
+backend/vision_api/resources/*
