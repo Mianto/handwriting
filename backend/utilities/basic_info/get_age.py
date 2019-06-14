@@ -19,16 +19,18 @@ def age(json_dict, first_name):
     for txt in text:
         i += 1
         if txt.lower() == 'age' or 'age' in txt.lower():
-            while i < 100:
-                if re.match(r".*?(\d+).*(\d+)", text[i + 1]):
-                    a = re.match(r".*?(\d+).*(\d+)", text[i + 1])
+            for _ in range(10):
+                if re.match(r"^[1-9][0-9]", text[i]):
+                    a = re.match(r"^[1-9][0-9]", text[i])
                     return ''.join(a[0])
                 i += 1
     
     # find age in case age not printed
     for box in adjacent_first_name_boxes:
-        if re.match(r".*?(\d+).*(\d+)", box['description']):
-            li.append(box['description'])
+        if re.match(r"^[1-9][0-9]", box['description']):
+            a = re.match(r"^[1-9][0-9]",box['description'])
+            li.append(''.join(a[0]))
+            
     for num in li:
         if  '+' in num:
             return num
