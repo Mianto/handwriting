@@ -26,18 +26,19 @@ def age_not_printed(json_text, first_name):
         adjacent_first_name_boxes = get_adjacent_box(json_dict, first_name_bb)
         
         for box in adjacent_first_name_boxes:
-        if re.match(r"[1-9][0-9]", box['description']):
-            a = re.match(r"[1-9][0-9]",box['description'])
-            li.append(''.join(a[0]))
-
+            if re.match(r"[1-9][0-9]", box['description']):
+                a = re.match(r"[1-9][0-9]",box['description'])
+                li.append(''.join(a[0]))
+            
     except Exception as e:
-        return Nones
+        return None
 
 
 def validate_age(li):
-    for num in li:
-        if 1 <= num <= 100:
-            return num
+    if li:
+        for num in li:
+            if 1 <= num <= 100:
+                return num
     return None
 
 

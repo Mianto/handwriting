@@ -26,7 +26,7 @@ def final_pipeline(image_folder, written_image_name, blank_image_name):
     patient_contact = get_contact_number.patient_contact_number(contact_written_number, contact_blank_number)
     date = get_date.get_date_list(written_di)
     age = get_age.age(written_di, name[0])
-    gender = get_gender.gender_printed(written_di)
+    gender = get_gender.gender(name[0])
 
     basic_info = {'name': name, 'contact_number': patient_contact, 'date': date, 'age': age, 'gender': gender}
 
