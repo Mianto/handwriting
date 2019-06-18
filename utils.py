@@ -13,12 +13,13 @@ def final_pipeline(image_folder, written_image_name, blank_image_name):
     """
     image_folder = Path(image_folder)
     written_image_name =  image_folder / written_image_name
+    
     blank_image_name = image_folder / blank_image_name
     print(written_image_name, blank_image_name)
 
     blank_di = dict_from_json(request_json(blank_image_name))
     written_di = dict_from_json(request_json(written_image_name))
-
+    
     name = get_name.name(written_di, r"backend\vision_api\resources\name_list.txt", r"backend\vision_api\resources\stanford-corenlp-full-2018-10-05", blank_di)
     contact_written_number = get_contact_number.contact_number(written_di)
     contact_blank_number = get_contact_number.contact_number(blank_di)
