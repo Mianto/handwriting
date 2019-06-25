@@ -10,18 +10,21 @@ def get_ner(json_dict, core_nlp_path):
            core_nlp_path path of stanford-corenlp-full-2018-10-05
     return: nnp list 
     """
-    ner_data = json_dict['textAnnotations'][0]['description']
-    ner_data = ner_data.replace('\n',' ')
+    try:
+        ner_data = json_dict['textAnnotations'][0]['description']
+        ner_data = ner_data.replace('\n',' ')
 
-    nlp = StanfordCoreNLP(core_nlp_path)
+        nlp = StanfordCoreNLP(core_nlp_path)
 
-    nnp = []
-    for x in nlp.pos_tag(ner_data):
-        if 'NNP' in x:
-            nnp.append(x[0])
-    nlp.close()
-    return nnp
-
+        nnp = []
+        for x in nlp.pos_tag(ner_data):
+            if 'NNP' in x:
+                nnp.append(x[0])
+        nlp.close()
+        return nnp
+    except Exception as e:
+        print(e)
+        return None
 
 if __name__ == "__main__":
     pass

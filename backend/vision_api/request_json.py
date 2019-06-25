@@ -24,18 +24,21 @@ def request_json (path):
     :return str(Json) file recieved from google cloud vision api
     """
     # call vision api
+    try:
+        client = vision.ImageAnnotatorClient()
 
-    client = vision.ImageAnnotatorClient()
+        with io.open(path, 'rb') as image_file:
+            content = image_file.read()
 
-    with io.open(path, 'rb') as image_file:
-        content = image_file.read()
+        image = vision.types.Image(content=content)
 
-    image = vision.types.Image(content=content)
+        response = client.document_text_detection(image=image)
 
-    response = client.document_text_detection(image=image)
+        response = MessageToJson(response)
+        return response
 
-    response = MessageToJson(response)
-    return response
-
+    except Exception as e:
+        print("Vision API failed to make any response" + e)
+    
 if __name__ == "__main__":
     pass

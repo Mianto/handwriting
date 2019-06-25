@@ -1,3 +1,10 @@
 from utils import final_pipeline
 
-final_pipeline(r'backend\vision_api\resources', 'w6.jpg', 'b6.jpg')
+final_pipeline(r'backend\vision_api\resources', 'w77.jpg', 'b77.jpg')
+
+# if __name__ == "__main__":
+#     input_folder = input("Enter the Input Folder: ")
+#     blank_image = input("Enter Blank Image Name: ")
+#     written_image = input("Enter Written Image name: ")
+
+#     final_pipeline(input_folder, blank_image, written_image)

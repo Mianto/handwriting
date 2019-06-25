@@ -40,13 +40,16 @@ def get_vocab_terms(path):
     return set(vocab)
 
 
-def name(json_dict, name_list_path, core_nlp_path, json_dict_blank=""):
+def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
     """Get name if it exist in name vocab list
     :param dict json_dict: full response of the vision api in dict
     :param dict json_dict_blank: response of the blank page for the google api
     :param Path name_list_path: path of the name list of the file
     :param Path core_nlp_path: path of the stanford core nlp
     """
+    if not json_dict:
+        return None
+    
     name_vocab = get_vocab_terms(path=name_list_path)
 
     if is_name_present(json_dict):
@@ -57,17 +60,16 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank=""):
         return first_name
 
     else:
-        total = get_ner(json_dict, core_nlp_path)
-        blank = get_ner(json_dict_blank, core_nlp_path)
+        if json_dict:
+            total = get_ner(json_dict, core_nlp_path)
+        
+        if json_dict_blank:
+            blank = get_ner(json_dict_blank, core_nlp_path)
+            written = list(set(total) - set(blank))
 
-        written = list()
-        for i in total:
-            falg = 0
-            for j in blank:
-                if i == j:
-                    falg = 1
-            if falg == 0:
-                written.append(i)
+        else:
+            written = list(set(total))
+
         
         name_list = list()
 
@@ -88,8 +90,8 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank=""):
     
 def get_last_name(json_dict, first_name):
 
-    if get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.002):
-        return get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.002)[0]['description']
+    if get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.007):
+        return get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.007)[0]['description']
     
 
 
