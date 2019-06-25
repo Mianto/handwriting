@@ -90,8 +90,8 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
     
 def get_last_name(json_dict, first_name):
 
-    if get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.007):
-        return get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.007)[0]['description']
+    if get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.005):
+        return get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.005)[0]['description']
     
 
 

@@ -1,0 +1,5 @@
+[
+  "tests/test_name.py::TestName::test_both_empty_image",
+  "tests/test_name.py::TestName::test_blank_empty_image",
+  "tests/test_name.py::TestName::test_written_empty_blank_full"
+]
