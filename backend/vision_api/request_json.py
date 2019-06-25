@@ -38,7 +38,7 @@ def request_json (path):
         return response
 
     except Exception as e:
-        print("Vision API failed to make any response" + e)
+        print("Vision API failed to make any response" + str(e))
     
 if __name__ == "__main__":
     pass

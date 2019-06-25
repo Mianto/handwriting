@@ -1,6 +1,6 @@
 from utils import final_pipeline
 
-final_pipeline(r'backend\vision_api\resources', 'w77.jpg', 'b77.jpg')
+final_pipeline(r'test_resource', 'w77.jpg', 'b77.jpg')
 
 # if __name__ == "__main__":
 #     input_folder = input("Enter the Input Folder: ")

@@ -27,7 +27,11 @@ def dict_from_json(json_file):
     :param json json_file: json_file from vision_api
     :return dict: a dictionary
     """
-    return eval(json_file)
+    try:
+        return eval(json_file)
+    except Exception as e:
+        print("Exception: " + str(e))
+        return None
 
 
 def start_and_end_page_value(json_dict):

@@ -1,8 +1,15 @@
 import json
 from pathlib import Path
+import configparser
 from backend.utilities.jsonpreprocessor import dict_from_json
 from backend.vision_api.request_json import request_json
 from backend.utilities.basic_info import get_date, get_contact_number, get_name, get_age, get_gender
+
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+stanford_nlp_path = config['DEFAULT']['stanford-core-nlp']
+name_file_path = config['DEFAULT']['name-list']
 
 
 def final_pipeline(image_folder, written_image_name, blank_image_name):
@@ -13,18 +20,21 @@ def final_pipeline(image_folder, written_image_name, blank_image_name):
     """
     image_folder = Path(image_folder)
     written_image_name =  image_folder / written_image_name
-    
     blank_image_name = image_folder / blank_image_name
     print(written_image_name, blank_image_name)
 
     blank_di = dict_from_json(request_json(blank_image_name))
     written_di = dict_from_json(request_json(written_image_name))
-    print(written_di)
+   
 
-    name = get_name.name(written_di, r"backend\vision_api\resources\name_list.txt", r"backend\vision_api\resources\stanford-corenlp-full-2018-10-05", blank_di)
+    name = get_name.name(written_di, name_file_path, stanford_nlp_path, blank_di)
+    print(name)
+
     contact_written_number = get_contact_number.contact_number(written_di)
     contact_blank_number = get_contact_number.contact_number(blank_di)
     patient_contact = get_contact_number.patient_contact_number(contact_written_number, contact_blank_number)
+
+
     date = get_date.get_date_list(written_di)
     age = get_age.age(written_di, name[0])
     gender = get_gender.gender(name[0])

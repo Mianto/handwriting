@@ -1,4 +1,5 @@
 .vscode/* 
+.vscode
 */.vscode/*
 */*/.vscode/*
 __pycache__/
@@ -7,3 +8,4 @@ backend/vision_api/resources/*
 test_resource
 test_resource/*
 *.pyc
+.pytest_cache/*
