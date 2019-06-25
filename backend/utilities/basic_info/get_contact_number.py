@@ -9,7 +9,17 @@ def contact_number(json_dict):
     :param json_dict 
     :return all present contact numbers 
     """
-    return re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', json_dict['textAnnotations'][0]['description'])
+    try:
+        return re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', json_dict['textAnnotations'][0]['description'])
+    except Exception as e:
+        print ("Exception" + str(e))
+        return []
+
+
+def remove_space(li):
+    for x in li:
+        x.replace(" ", "")
+    return li
 
 
 def patient_contact_number(written_number, blank_number):
@@ -17,7 +27,11 @@ def patient_contact_number(written_number, blank_number):
     param: contacts number in prescribed, contacts number in blank page
     return: patient conatct number
     """
-    return list(set(written_number) - set(blank_number))
+    if blank_number and written_number:
+       li = list(set(written_number) - set(blank_number))
+       remove_space(li)
+       return li
+    return written_number
 
 
 if __name__ == "__main__":

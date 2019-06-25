@@ -54,15 +54,15 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
 
     if is_name_present(json_dict):
         first_name = get_first_name_if_name(json_dict)
-        last_name = get_last_name(json_dict, first_name)
+        last_name = get_last_name(json_dict, first_name, name_vocab)
         if last_name: 
-            return first_name, last_name
+            return (first_name, last_name)
         return first_name
 
     else:
         if json_dict:
             total = get_ner(json_dict, core_nlp_path)
-        
+            
         if json_dict_blank:
             blank = get_ner(json_dict_blank, core_nlp_path)
             written = list(set(total) - set(blank))
@@ -70,28 +70,28 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
         else:
             written = list(set(total))
 
-        
         name_list = list()
 
         for word in written:
             if word.strip().lower() in name_vocab:
                 name_list.append(word)
       
-
+        print(name_list)
         for name in name_list:
-            last_name = get_last_name(json_dict, name)
+            last_name = get_last_name(json_dict, name, name_vocab)
 
-            if last_name in name_list:
-                return name, last_name
-        
-        if len(name_list) == 1:
-            return name_list[0]
+            if last_name:
+                return (name, last_name, name_vocab)
+        return name_list[0]
     
     
-def get_last_name(json_dict, first_name):
+def get_last_name(json_dict, first_name, name_list):
+    boxes = get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.005)
+    if boxes:
+        for i in range(len(boxes)):
+            if boxes[i]['description'].strip().lower() in name_list:
+                return boxes[i]['description']
 
-    if get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.005):
-        return get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.005)[0]['description']
     
 
 

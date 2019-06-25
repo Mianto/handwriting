@@ -47,7 +47,7 @@ def is_date(string, fuzzy=False):
     """
     try: 
         dt = parse(string, fuzzy=fuzzy)
-        x = dt - (datetime.datetime.now() - datetime.timedelta(days = 1))
+        x = dt - (datetime.datetime.now() - datetime.timedelta(days = 7))
         if x.days < 0:
             return False
         return dt

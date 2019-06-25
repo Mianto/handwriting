@@ -75,7 +75,7 @@ def percentage_value_of_box(box_coordinates, start, end):
     
     start_x, start_y = start
     end_x, end_y = end
-    
+    eps = 1e-4
     average_x = 0
     average_y = 0
     for vertices in box_coordinates:
@@ -85,8 +85,7 @@ def percentage_value_of_box(box_coordinates, start, end):
             average_y += vertices['y']
     average_x /= len(box_coordinates)
     average_y /= len(box_coordinates)
-
-    return (average_x - start_x)/(end_x - start_x), (average_y - start_y)/(end_y - start_y)
+    return (average_x - start_x)/(end_x - start_x + eps), (average_y - start_y)/(end_y - start_y + eps)
 
 
 def box_within_percentage(json_dict, percent=0.4):
