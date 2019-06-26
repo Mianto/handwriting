@@ -93,11 +93,23 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
 def get_last_name(json_dict, first_name, name_list):
     # first name is either giving first name or last name
     # check one word before and after the name
-    boxes = get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.005)
-    if boxes:
-        for i in range(len(boxes)):
-            if boxes[i]['description'].strip().lower() in name_list:
-                return boxes[i]['description']
+    # boxes = get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.005)
+    # if boxes:
+    #     for i in range(len(boxes)):
+    #         if boxes[i]['description'].strip().lower() in name_list:
+    #             return boxes[i]['description']
+    texts = get_text_from_bounding_box(box_within_percentage(json_dict))
+    texts = texts.split(' ')
+    n = len(texts)
+    for i, txt in enumerate(texts):
+        if txt == first_name:
+            break
+    
+    while i < n:
+        if texts[i - 2] != first_name and texts[i - 2].lower() in name_list:
+            return texts[i - 2]
+        i += 1
+    return None
 
     
 

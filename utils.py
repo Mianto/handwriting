@@ -26,7 +26,7 @@ def final_pipeline(image_folder, written_image_name, blank_image_name):
 
         blank_di = dict_from_json(request_json(blank_image_name))
         written_di = dict_from_json(request_json(written_image_name))
-        print(written_di)
+
 
         name = get_name.name(written_di, name_file_path, stanford_nlp_path, blank_di)
         print(name)
