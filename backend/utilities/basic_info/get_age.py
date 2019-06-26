@@ -37,7 +37,7 @@ def age_not_printed(json_text, first_name):
 def validate_age(li):
     if li:
         for num in li:
-            if 1 <= num <= 100:
+            if 1 <= int(num) <= 100:
                 return num
     return None
 

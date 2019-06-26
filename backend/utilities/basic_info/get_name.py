@@ -3,7 +3,9 @@ from ..jsonpreprocessor import *
 
 
 def get_first_name_if_name(json_dict):
-    """Get the first name if Name is printed
+    """
+    Get the first name if Name is printed
+
     :param dict json_dict: full response of the vision api in dict
     :return first_name in case of printed name
     """
@@ -29,7 +31,9 @@ def is_name_present(json_dict):
 
 
 def get_vocab_terms(path):
-    """Load file to a set
+    """
+    Load file to a set
+
     :param str path: path to the file to be loaded
     :return set: A set containing all the names 
     """
@@ -41,7 +45,9 @@ def get_vocab_terms(path):
 
 
 def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
-    """Get name if it exist in name vocab list
+    """
+    Get name if it exist in name vocab list
+
     :param dict json_dict: full response of the vision api in dict
     :param dict json_dict_blank: response of the blank page for the google api
     :param Path name_list_path: path of the name list of the file
@@ -85,6 +91,8 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
     
     
 def get_last_name(json_dict, first_name, name_list):
+    # first name is either giving first name or last name
+    # check one word before and after the name
     boxes = get_adjacent_box(json_dict, get_first_name_box(json_dict, first_name), 0.005)
     if boxes:
         for i in range(len(boxes)):
