@@ -76,12 +76,11 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
             if word.strip().lower() in name_vocab:
                 name_list.append(word)
       
-        print(name_list)
         for name in name_list:
             last_name = get_last_name(json_dict, name, name_vocab)
 
             if last_name:
-                return (name, last_name, name_vocab)
+                return (name, last_name)
         return name_list[0]
     
     

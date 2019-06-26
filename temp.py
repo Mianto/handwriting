@@ -1,6 +1,6 @@
 from utils import final_pipeline
 
-final_pipeline(r'test_resource/images', 'nutan_5.jpg', '')
+final_pipeline(r'test_resource/images', 'mandeep_2.jpg', 'mandeep_blank.jpg')
 
 # if __name__ == "__main__":
 #     input_folder = input("Enter the Input Folder: ")

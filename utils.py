@@ -25,10 +25,9 @@ def final_pipeline(image_folder, written_image_name, blank_image_name):
 
     blank_di = dict_from_json(request_json(blank_image_name))
     written_di = dict_from_json(request_json(written_image_name))
-    print(written_di)
+
 
     name = get_name.name(written_di, name_file_path, stanford_nlp_path, blank_di)
-    print(name)
 
     contact_written_number = get_contact_number.contact_number(written_di)
     contact_blank_number = get_contact_number.contact_number(blank_di)
@@ -42,9 +41,9 @@ def final_pipeline(image_folder, written_image_name, blank_image_name):
 
     basic_info = {'name': name, 'contact_number': patient_contact, 'date': date, 'age': age, 'gender': gender}
 
-    basic_info = json.dumps(basic_info)
+    # basic_info = json.dumps(basic_info)
     print(basic_info)
-    return json.loads(basic_info)
+    # return json.loads(basic_info)
 
 
 
