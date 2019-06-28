@@ -1,5 +1,7 @@
 import json
+import os
 from pathlib import Path
+import urllib.request
 import configparser
 from backend.utilities.jsonpreprocessor import dict_from_json
 from backend.vision_api.request_json import request_json
@@ -10,24 +12,32 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 stanford_nlp_path = config['DEFAULT']['stanford-core-nlp']
 name_file_path = config['DEFAULT']['name-list']
+upload_folder = config['TEST']['upload_folder']
 
 
-def final_pipeline(image_folder, written_image_name, blank_image_name):
+def final_pipeline(blank_url, written_url):
     """
     :param Path image_folder: folder in which image is uploaded
     :param str written_image_name: actual prescription
     :param str blank_image_name: blank precription
     """
-    image_folder = Path(image_folder)
-    written_image_name =  image_folder / written_image_name
-    blank_image_name = image_folder / blank_image_name
+    # image_folder = Path(image_folder)
+    # written_image_name =  image_folder / written_image_name
+    # blank_image_name = image_folder / blank_image_name
+    # create_new_folder(upload_folder)
+    global upload_folder
+    saved_blank_path = os.path.join(upload_folder, 'bl1.jpg')
+    urllib.request.urlretrieve(blank_url, saved_blank_path)
 
-    
-    print(written_image_name, blank_image_name)
+    upload_folder = Path(upload_folder)
+
+    blank_image_name = upload_folder / 'bl1.jpg'
+    saved_written_path = os.path.join(upload_folder, 'wr1.jpg')
+    written_image_name = upload_folder / 'wr1.jpg'
+    urllib.request.urlretrieve(written_url, saved_written_path)
 
     blank_di = dict_from_json(request_json(blank_image_name))
     written_di = dict_from_json(request_json(written_image_name))
-    print(written_di)
 
     name = get_name.name(written_di, name_file_path, stanford_nlp_path, blank_di)
     print(name)
@@ -56,4 +66,8 @@ def final_pipeline(image_folder, written_image_name, blank_image_name):
     return basic_info
 
 
-
+def create_new_folder(local_dir):
+    newpath = local_dir
+    if not os.path.exists(newpath):
+        os.makedirs(newpath)
+    return newpath
