@@ -87,7 +87,9 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
 
             if last_name:
                 return (name, last_name)
-        return name_list[0]
+        if len(name_list) > 0:
+            return name_list[0]
+        return None
     
     
 def get_last_name(json_dict, first_name, name_list):

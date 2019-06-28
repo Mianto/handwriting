@@ -1,5 +1,5 @@
 import re
-from ..jsonpreprocessor import get_first_name_box, get_adjacent_box
+from ..jsonpreprocessor import box_within_percentage, get_text_from_bounding_box
 
 
 def age_printed(json_text):
@@ -24,6 +24,7 @@ def age_not_printed(json_text, first_name):
     try:
         first_name_bb = get_first_name_box(json_dict, first_name)
         adjacent_first_name_boxes = get_adjacent_box(json_dict, first_name_bb)
+        # text = get_text_from_bounding_box(box_within_percentage(json_dict))
         
         for box in adjacent_first_name_boxes:
             if re.match(r"[1-9][0-9]", box['description']):
@@ -50,7 +51,7 @@ def age(json_dict, first_name=None):
     """
     text = json_dict['textAnnotations'][0]['description']
     
-    text.lower()
+    text = text.lower()
     if 'age' in text:
         # find age in case of printed
         li = age_printed(text)
@@ -62,7 +63,7 @@ def age(json_dict, first_name=None):
         if not first_name:
             return None
 
-        li = age_not_printed(text, first_name)
+        li = age_not_printed(json_dict, first_name)
         return validate_age(li)
             
 

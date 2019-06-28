@@ -29,7 +29,7 @@ def patient_contact_number(written_number, blank_number):
     """
     if blank_number and written_number:
        li = list(set(written_number) - set(blank_number))
-       remove_space(li)
+       li = remove_space(li)
        return li
     return written_number
 
