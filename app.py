@@ -4,7 +4,7 @@ from flask_cors import CORS
 import os
 from werkzeug import secure_filename
 from utils import final_pipeline
-
+from waitress import serve
 
 # written_url = "https://jrcdn.azureedge.net/justreliefblob/Lab/4084/2019/6/27/636972560515071077.jpg"
 # blank_url = "https://jrcdn.azureedge.net/justreliefblob/Lab/4084/2019/6/27/636972561000886436.jpg"
@@ -38,16 +38,18 @@ def api_root():
         #     saved_path = os.path.join(app.config['UPLOAD_FOLDER'], img_name)
         #     img.save(saved_path)
         #     file_names.append(img_name)
+        if request.method == "POST":
+            blank_image_url = request.args.get('blank')
+            written_image_url = request.args.get('written')       
 
-        blank_image_url = request.args.get('blank')
-        written_image_url = request.args.get('written')       
-        
-        result = final_pipeline(blank_image_url, written_image_url)
-        return jsonify(result)
-    except:
-        return Response("No Image Sent", status=401)
+            result = final_pipeline(blank_image_url, written_image_url)
+            return jsonify(result)
+        else:
+            return Response("Post request not connected", status=402)
+    except Exception as e:
+        return Response("{}".format(e), status=401)
     
 if __name__ == "__main__":
-    app.run(debug=True)
+    serve(app, host='0.0.0.0', port=8080)
 
 

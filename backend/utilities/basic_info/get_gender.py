@@ -51,6 +51,9 @@ def get_gender_using_title(json_dict, first_name):
 
 def check_for_gender(json_dict, first_name, initial_guess_list):
     # assumption gender is not written before name
+    """
+    Check for the gender after getting initial guess from Genderize
+    """
     try:
         texts = get_text_from_bounding_box(box_within_percentage(json_dict))
         texts = texts.split(first_name)[1:]

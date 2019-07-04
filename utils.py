@@ -13,6 +13,8 @@ config.read('config.ini')
 stanford_nlp_path = config['DEFAULT']['stanford-core-nlp']
 name_file_path = config['DEFAULT']['name-list']
 upload_folder = config['TEST']['upload_folder']
+google_secret_key = config['DEFAULT']['GOOGLE_APPLICATION_CREDENTIALS']
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = google_secret_key
 
 
 def final_pipeline(blank_url, written_url):
@@ -40,12 +42,11 @@ def final_pipeline(blank_url, written_url):
     written_di = dict_from_json(request_json(written_image_name))
 
     name = get_name.name(written_di, name_file_path, stanford_nlp_path, blank_di)
-    print(name)
+
     contact_written_number = get_contact_number.contact_number(written_di)
     contact_blank_number = get_contact_number.contact_number(blank_di)
     patient_contact = get_contact_number.patient_contact_number(contact_written_number, contact_blank_number)
 
-    print(patient_contact)
     date = get_date.get_date_list(written_di)
 
     age = get_age.age(written_di, name[0])
