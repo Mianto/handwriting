@@ -30,6 +30,15 @@ def is_name_present(json_dict):
     return False
 
 
+def is_title_present(json_dict):
+    texts = json_dict['textAnnotations'][0]['description'].split(' ')
+    title_list = ['Mr.', 'Mr', 'Mrs', 'Mrs.', 'Ms.', 'Ms', 'Miss']
+    for title in title_list:
+        if title in texts:
+            return True
+    return False    
+
+
 def get_vocab_terms(path):
     """
     Load file to a set
@@ -42,6 +51,27 @@ def get_vocab_terms(path):
         for i in fp:
             vocab.append(i.strip().lower())
     return set(vocab)
+
+
+def get_title_if_present(json_dict, name_list):
+    texts = get_text_from_bounding_box(box_within_percentage(json_dict))
+    texts = texts.split(' ')
+    title_list = ['mr.', 'mr', 'mrs', 'mrs.', 'ms.', 'ms', 'miss']
+
+    n = len(texts)
+    i = 0
+    while i < n:
+        if texts[i].lower() in title_list:
+            break
+        i += 1
+
+    total_name = [texts[i]]
+    for j in range(3):
+        if text[i + 1] in name_list:
+            total_name.append(texts[i + 1])
+        i += 1
+    
+    return total_name
 
 
 def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
@@ -64,6 +94,9 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
         if last_name: 
             return (first_name, last_name)
         return first_name
+
+    elif is_title_present(json_dict):
+        return get_title_if_present(json_dict, name_vocab)
 
     else:
         if json_dict:
