@@ -9,8 +9,10 @@ def contact_number(json_dict):
     :param json_dict 
     :return all present contact numbers 
     """
+    texts =  json_dict['textAnnotations'][0]['description']
+    texts = texts.replace('\n', '$')
     try:
-        li = re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', json_dict['textAnnotations'][0]['description'])
+        li = re.findall(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', texts)
         return ten_digit_contact_number(li)
     
     except Exception as e:

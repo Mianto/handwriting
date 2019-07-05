@@ -12,7 +12,7 @@ def get_date_list(json_dict):
     """
     date_list = list()
     date_list_str = list()
-    texts = json_dict['textAnnotations'][0]['description'].replace('\n', ' ')
+    texts = json_dict['textAnnotations'][0]['description']
     texts = texts.split(' ')
     for txt in texts:
         # format -> 31/1/2019 or or 31-1-2019
@@ -30,7 +30,7 @@ def get_date_list(json_dict):
                 date_temp_with_one = match1.group(1) + '/' + match1.group(2) + '/' +match1.group(3)
                 if is_date(date_temp_with_one, fuzzy=True):
                     date_list.append(is_date(date_temp_with_one, fuzzy=True))
-        if match2:
+        elif match2:
             if is_date(match2.group(), fuzzy=True):
                 date_list.append(is_date(match2.group(), fuzzy=True))
         
@@ -40,7 +40,7 @@ def get_date_list(json_dict):
                 if is_date(date_temp_with_one, fuzzy=True):
                     date_list.append(is_date(date_temp_with_one, fuzzy=True))
                     
-        if match3:
+        elif match3:
             if is_date(match3.group(), fuzzy=True):
                 date_list.append(is_date(match3.group(), fuzzy=True))
     
