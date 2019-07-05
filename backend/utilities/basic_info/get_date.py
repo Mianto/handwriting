@@ -12,7 +12,8 @@ def get_date_list(json_dict):
     """
     date_list = list()
     date_list_str = list()
-    texts = json_dict['textAnnotations'][0]['description'].split('\n')
+    texts = json_dict['textAnnotations'][0]['description'].replace('\n', ' ')
+    texts = texts.split(' ')
     for txt in texts:
         # format -> 31/1/2019 or or 31-1-2019
         match1 = re.search(r"(0?[1-9]|[12][0-9]|3[01])[1\/\-](0?[1-9]|1[012])[1\/\-](\d{4})", txt)
