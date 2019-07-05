@@ -28,7 +28,7 @@ def get_first_name_if_name(json_dict, name_list):
 
 def is_name_present(json_dict):
     texts = json_dict['textAnnotations'][0]['description']
-    if "name" in texts:
+    if "name" in texts.lower():
         return True
     return False
 
@@ -60,23 +60,32 @@ def get_title_if_present(json_dict, name_list):
     texts = get_text_from_bounding_box(box_within_percentage(json_dict))
     texts = texts.split(' ')
     title_list = ['mr.', 'mr', 'mrs', 'mrs.', 'ms.', 'ms', 'miss']
-
     n = len(texts)
     i = 0
+    flag = 0
     while i < n:
-        if texts[i].lower() in title_list:
+        for title in title_list:
+            if title in texts[i].lower():
+                flag = 1
+                break
+        if flag == 1:
             break
         i += 1
 
     total_name = list()
-    total_name.append(texts[i])
-    for j in range(10):
+    
+    while i < n:
         w = texts[i].lower()
         if w in name_list:
             total_name.append(texts[i])
         i += 1
-    
-    return tuple(total_name)
+
+    if len(total_name) > 1:
+        return tuple(total_name)
+    elif len(total_name) == 1:
+        return (total_name, )
+    else:
+        return None
 
 
 def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):

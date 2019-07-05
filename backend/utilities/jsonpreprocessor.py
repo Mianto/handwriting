@@ -112,7 +112,8 @@ def get_text_from_bounding_box(bounding_boxes):
     """
     concat_string = ""
     for bounding_box in bounding_boxes:
-        concat_string += bounding_box['description'] + ' '
+        text_bounding_box = bounding_box['description'].replace('\n', ' ')
+        concat_string += text_bounding_box + ' '
     return concat_string
 
 

@@ -49,9 +49,13 @@ def final_pipeline(blank_url, written_url):
 
     date = get_date.get_date_list(written_di)
 
-    age = get_age.age(written_di, name[0])
+    
+    gender = None
+    age = None
+    
     if type(name) == tuple:
         for n in name:
+            age = get_age.age(written_di, n)
             if get_gender.gender(written_di, n):
                 gender = get_gender.gender(written_di, n)
             if get_age.age(written_di, n):

@@ -21,13 +21,13 @@ def get_date_list(json_dict):
         match2 = re.search(r"(0?[1-9]|[12][0-9]|3[01])[1\/\-](0?[1-9]|1[012])[1\/\-](\d{2})", txt)
         # format -> 31/May/2019
         match3 = re.search(r"(\b\d{1,2}\D{0,3})?\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|(Nov|Dec)(?:ember)?)\D?(\d{1,2}(st|nd|rd|th)?)?(([ ,.\-\/])\D?)?((19[7-9]\d|20\d{2})|\d{2})*", txt)
-        
+    
         if match1:
             if is_date(match1.group(), fuzzy=True):
                 date_list.append(is_date(match1.group(), fuzzy=True))
             else:
                 # 1 is present in b/w dates
-                date_temp_with_one = match1.group(1) + '/' + match1.group(2) + '/' +match3.group(3)
+                date_temp_with_one = match1.group(1) + '/' + match1.group(2) + '/' +match1.group(3)
                 if is_date(date_temp_with_one, fuzzy=True):
                     date_list.append(is_date(date_temp_with_one, fuzzy=True))
         if match2:
@@ -36,7 +36,7 @@ def get_date_list(json_dict):
         
             else:
                 # 1 is present in b/w dates
-                date_temp_with_one = match1.group(1) + '/' + match1.group(2) + '/' +match3.group(3)
+                date_temp_with_one = match2.group(1) + '/' + match2.group(2) + '/' +match2.group(3)
                 if is_date(date_temp_with_one, fuzzy=True):
                     date_list.append(is_date(date_temp_with_one, fuzzy=True))
                     
@@ -58,7 +58,7 @@ def is_date(string, fuzzy=False):
     """
     try: 
         dt = parse(string, fuzzy=fuzzy)
-        x = dt - (datetime.datetime.now() - datetime.timedelta(days = 7))
+        x = dt - (datetime.datetime.now() - datetime.timedelta(days = 2000))
         if x.days < 0:
             return False
         return dt

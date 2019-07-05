@@ -49,14 +49,14 @@ def get_gender_using_title(json_dict, first_name):
         return None
 
 
-def check_for_gender(json_dict, first_name, initial_guess_list):
+def check_for_gender(json_dict, initial_guess_list):
     # assumption gender is not written before name
     """
     Check for the gender after getting initial guess from Genderize
     """
     try:
         texts = get_text_from_bounding_box(box_within_percentage(json_dict))
-        texts = texts.split(first_name)[1:]
+        texts = texts.split(' ')
         for txt in texts:  
             for guess in initial_guess_list:
                 if guess in txt:
@@ -91,10 +91,10 @@ def gender(json_dict, first_name):
     try:
         li = Genderize().get([first_name])[0]
         if li['gender'] == 'male':
-            if check_for_gender(json_dict, first_name, male_guess_list):
+            if check_for_gender(json_dict, male_guess_list):
                 return "M"
         elif li['gender'] == 'female':
-            if check_for_gender(json_dict, first_name, female_guess_list):
+            if check_for_gender(json_dict, female_guess_list):
                 return "F"
         return None
     
