@@ -2,39 +2,42 @@ from ..ner.name_recognition import get_ner
 from ..jsonpreprocessor import *
 
 
-def get_first_name_if_name(json_dict):
+def get_first_name_if_name(json_dict, name_list):
     """
     Get the first name if Name is printed
 
     :param dict json_dict: full response of the vision api in dict
     :return first_name in case of printed name
     """
-    texts = json_dict['textAnnotations'][0]['description'].split(' ')
+    texts = json_dict['textAnnotations'][0]['description']
+    texts = texts.replace('\n', ' ')
+    texts = texts.split(' ')
     i = 0
     for txt in texts:
         i += 1
-        if txt.lower() == 'name' or "name" in txt.lower():
+        if txt.lower() == "name" or "name" in txt.lower():
             j = 0
             while len(texts[i]) < 2 and j < 50:
                 i += 1
                 j += 1
-            return texts[i]
+            if texts[i].lower() in name_list:
+                return texts[i]
                 
     return None
 
 
 def is_name_present(json_dict):
-    texts = json_dict['textAnnotations'][0]['description'].split(' ')
-    if "name" in texts or "Name" in texts or "Name:" in texts:
+    texts = json_dict['textAnnotations'][0]['description']
+    if "name" in texts:
         return True
     return False
 
 
 def is_title_present(json_dict):
-    texts = json_dict['textAnnotations'][0]['description'].split(' ')
-    title_list = ['Mr.', 'Mr', 'Mrs', 'Mrs.', 'Ms.', 'Ms', 'Miss']
+    texts = json_dict['textAnnotations'][0]['description']
+    title_list = ['mr.', 'mr', 'mrs', 'mrs.', 'ms.', 'ms', 'miss']
     for title in title_list:
-        if title in texts:
+        if title in texts.lower():
             return True
     return False    
 
@@ -65,13 +68,15 @@ def get_title_if_present(json_dict, name_list):
             break
         i += 1
 
-    total_name = [texts[i]]
-    for j in range(3):
-        if text[i + 1] in name_list:
-            total_name.append(texts[i + 1])
+    total_name = list()
+    total_name.append(texts[i])
+    for j in range(10):
+        w = texts[i].lower()
+        if w in name_list:
+            total_name.append(texts[i])
         i += 1
     
-    return total_name
+    return tuple(total_name)
 
 
 def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
@@ -89,11 +94,11 @@ def name(json_dict, name_list_path, core_nlp_path, json_dict_blank):
     name_vocab = get_vocab_terms(path=name_list_path)
 
     if is_name_present(json_dict):
-        first_name = get_first_name_if_name(json_dict)
+        first_name = get_first_name_if_name(json_dict, name_vocab)
         last_name = get_last_name(json_dict, first_name, name_vocab)
         if last_name: 
             return (first_name, last_name)
-        return first_name
+        return (first_name,)
 
     elif is_title_present(json_dict):
         return get_title_if_present(json_dict, name_vocab)
@@ -140,7 +145,7 @@ def get_last_name(json_dict, first_name, name_list):
         if txt == first_name:
             break
     
-    while i < n:
+    while i < n and i > 2:
         if texts[i - 2] != first_name and texts[i - 2].lower() in name_list:
             return texts[i - 2]
         i += 1
