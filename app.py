@@ -45,11 +45,12 @@ def api_root():
             result = final_pipeline(blank_image_url, written_image_url)
             return jsonify(result)
         else:
-            return Response("Post request not connected", status=402)
+            return Response("Post request not connected", status=401)
     except Exception as e:
         return Response("{}".format(e), status=401)
     
 if __name__ == "__main__":
     serve(app, host='0.0.0.0', port=8080)
+    #app.run(debug=True)
 
 

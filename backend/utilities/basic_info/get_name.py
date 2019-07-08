@@ -73,12 +73,18 @@ def get_title_if_present(json_dict, name_list):
         i += 1
 
     total_name = list()
+    total_name.append(texts[i])
+    count = 0
+    i += 1
     
-    while i < n:
+    while count < 10:
         w = texts[i].lower()
         if w in name_list:
             total_name.append(texts[i])
+        elif len(texts[i]) > 2:
+            break
         i += 1
+        count += 1
 
     if len(total_name) > 1:
         return tuple(total_name)
