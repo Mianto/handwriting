@@ -67,7 +67,7 @@ def final_pipeline(blank_url, written_url):
     basic_info = {'name': name, 'contact_number': patient_contact, 'date': date, 'age': age, 'gender': gender}
 
     basic_info = json.dumps(basic_info)
-    print(basic_info)
+
     return basic_info
 
 

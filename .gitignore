@@ -4,7 +4,6 @@
 */*/.vscode/*
 __pycache__/
 *.pyc
-backend/vision_api/resources/*
 test_resource
 test_resource/*
 *.pyc
